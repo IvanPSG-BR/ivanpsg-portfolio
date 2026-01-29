@@ -1,0 +1,125 @@
+---
+/**
+ * Base Layout - Layout principal do portfólio
+ *
+ * Estrutura HTML semântica com:
+ * - Meta tags otimizadas para SEO
+ * - Fontes Google (Inter + JetBrains Mono)
+ * - Global CSS com paleta Modern Coder
+ * - Skip link para acessibilidade
+ * - Suporte a tema claro/escuro
+ */
+
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Ivan Pedro Sampaio Gonçalves - Desenvolvedor Backend",
+  description = "Portfólio de Ivan Pedro Sampaio Gonçalves - Desenvolvedor Backend especializado em soluções eficientes e escaláveis.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="author" content="Ivan Pedro Sampaio Gonçalves" />
+    <meta
+      name="keywords"
+      content="desenvolvedor backend, portfólio, programador, web development"
+    />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="ivanpsg.dev" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon (placeholder - substituir com real) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preconnect para Google Fonts (performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/e9077cd72b.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <!-- Skip to content link para screen readers -->
+    <a href="#main-content" class="skip-to-content">
+      Pular para o conteúdo principal
+    </a>
+
+    <!-- Main content wrapper -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Slot principal - componentes serão injetados aqui -->
+      <main id="main-content" class="flex-1">
+        <slot />
+      </main>
+    </div>
+
+    <!-- Script para gerenciar tema (dark/light) -->
+    <script>
+      // Função para aplicar o tema
+      function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      // Carregar tema salvo ou usar preferência do sistema
+      function loadTheme() {
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme) {
+          applyTheme(savedTheme);
+        } else {
+          // Detectar preferência do sistema
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          applyTheme(prefersDark ? "dark" : "light");
+        }
+      }
+
+      // Aplicar tema imediatamente (antes do DOM carregar)
+      loadTheme();
+
+      // Toggle de tema (será chamado pelo botão no Header)
+      function toggleTheme() {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        applyTheme(newTheme);
+      }
+
+      // Expor função globalmente para uso nos componentes
+      window["toggleTheme"] = toggleTheme;
+
+      // Listener para mudanças na preferência do sistema
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          if (!localStorage.getItem("theme")) {
+            applyTheme(e.matches ? "dark" : "light");
+          }
+        });
+    </script>
+  </body>
+</html>

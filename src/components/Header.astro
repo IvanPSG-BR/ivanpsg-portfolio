@@ -1,0 +1,217 @@
+---
+/**
+ * Header Component - Navegação principal
+ *
+ * Features:
+ * - Logo textual "ivanpsg.dev"
+ * - Navegação com 3 links (Sobre, Projetos, Contato)
+ * - Toggle de tema dark/light acessível
+ * - Sticky positioning opcional
+ * - Aria-labels e navegação acessível
+ */
+---
+
+<header
+  class="sticky top-0 z-50 glass border-b border-modern-border"
+  role="banner"
+>
+  <div class="container-custom">
+    <nav
+      class="flex items-center justify-between py-4"
+      aria-label="Navegação principal"
+    >
+      <!-- Logo -->
+      <a
+        href="/"
+        class="text-xl font-bold text-modern-text hover:text-modern-accent transition-colors duration-240"
+        aria-label="ivanpsg.dev - Página inicial"
+      >
+        <span class="font-mono">ivanpsg</span><span class="text-modern-accent"
+          >.dev</span
+        >
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex items-center gap-8">
+        <li>
+          <a
+            href="#sobre"
+            class="text-modern-text hover:text-modern-accent transition-colors duration-240 font-medium"
+            aria-label="Ir para seção Sobre"
+          >
+            Sobre
+          </a>
+        </li>
+        <li>
+          <a
+            href="#projetos"
+            class="text-modern-text hover:text-modern-accent transition-colors duration-240 font-medium"
+            aria-label="Ir para seção Projetos"
+          >
+            Projetos
+          </a>
+        </li>
+        <li>
+          <a
+            href="#contato"
+            class="text-modern-text hover:text-modern-accent transition-colors duration-240 font-medium"
+            aria-label="Ir para seção Contato"
+          >
+            Contato
+          </a>
+        </li>
+      </ul>
+
+      <!-- Theme Toggle Button -->
+      <button
+        id="theme-toggle"
+        type="button"
+        class="p-2.5 rounded-md border border-modern-border hover:border-modern-accent transition-all duration-240 hover:scale-105"
+        aria-label="Alternar tema claro/escuro"
+        aria-pressed="false"
+      >
+        <!-- Sun Icon (Light Mode) -->
+        <svg
+          class="sun-icon w-5 h-5 text-modern-text hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+          ></path>
+        </svg>
+
+        <!-- Moon Icon (Dark Mode) -->
+        <svg
+          class="moon-icon w-5 h-5 text-modern-text"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Mobile Menu Button (hamburger) -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="md:hidden p-2.5 rounded-md border border-modern-border hover:border-modern-accent transition-all duration-240"
+        aria-label="Abrir menu de navegação"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          class="w-5 h-5 text-modern-text"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden pb-4"
+      role="navigation"
+      aria-label="Menu de navegação móvel"
+    >
+      <ul class="flex flex-col gap-4">
+        <li>
+          <a
+            href="#sobre"
+            class="block text-modern-text hover:text-modern-accent transition-colors duration-240 font-medium"
+          >
+            Sobre
+          </a>
+        </li>
+        <li>
+          <a
+            href="#projetos"
+            class="block text-modern-text hover:text-modern-accent transition-colors duration-240 font-medium"
+          >
+            Projetos
+          </a>
+        </li>
+        <li>
+          <a
+            href="#contato"
+            class="block text-modern-text hover:text-modern-accent transition-colors duration-240 font-medium"
+          >
+            Contato
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Theme Toggle
+  const themeToggle = document.getElementById("theme-toggle");
+  const sunIcon = themeToggle?.querySelector(".sun-icon");
+  const moonIcon = themeToggle?.querySelector(".moon-icon");
+
+  // Atualizar ícones baseado no tema atual
+  function updateThemeIcons() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    if (currentTheme === "dark") {
+      sunIcon?.classList.add("hidden");
+      moonIcon?.classList.remove("hidden");
+      themeToggle?.setAttribute("aria-pressed", "false");
+    } else {
+      sunIcon?.classList.remove("hidden");
+      moonIcon?.classList.add("hidden");
+      themeToggle?.setAttribute("aria-pressed", "true");
+    }
+  }
+
+  // Inicializar ícones
+  updateThemeIcons();
+
+  // Toggle ao clicar
+  themeToggle?.addEventListener("click", () => {
+    if (typeof window["toggleTheme"] === "function") {
+      window["toggleTheme"]();
+    }
+    updateThemeIcons();
+  });
+
+  // Mobile Menu Toggle
+  const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuToggle?.addEventListener("click", () => {
+    const isExpanded =
+      mobileMenuToggle.getAttribute("aria-expanded") === "true";
+    mobileMenuToggle.setAttribute("aria-expanded", String(!isExpanded));
+    mobileMenu?.classList.toggle("hidden");
+  });
+
+  // Fechar menu mobile ao clicar em um link
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+      mobileMenuToggle?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

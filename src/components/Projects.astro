@@ -1,0 +1,91 @@
+---
+/**
+ * Projects Component - Seção de projetos em grid
+ *
+ * Grid responsivo com cards de projetos
+ * - 1 coluna em mobile
+ * - 2 colunas em desktop
+ */
+
+import ProjectCard from "./ProjectCard.astro";
+
+// Dados dos projetos (exemplo - substituir com dados reais)
+const projects = [
+  {
+    title: "Sistema de Gerenciamento",
+    description:
+      "API RESTful escalável para gerenciamento de recursos com autenticação JWT e banco de dados PostgreSQL.",
+    stack: ["Node.js", "Express", "PostgreSQL", "JWT"],
+    link: "https://github.com/ivanpsg",
+    thumbnail: undefined,
+  },
+  {
+    title: "Microserviços Financeiros",
+    description:
+      "Arquitetura de microserviços para processamento de transações financeiras com alta disponibilidade.",
+    stack: ["Python", "FastAPI", "Redis", "Docker"],
+    link: "https://github.com/ivanpsg",
+    thumbnail: undefined,
+  },
+  {
+    title: "CLI Tool Automation",
+    description:
+      "Ferramenta de linha de comando para automação de deploys e configurações de ambiente.",
+    stack: ["Go", "CLI", "YAML", "GitHub Actions"],
+    link: "https://github.com/ivanpsg",
+    thumbnail: undefined,
+  },
+  {
+    title: "API Gateway",
+    description:
+      "Gateway de API com rate limiting, cache distribuído e monitoramento em tempo real.",
+    stack: ["Rust", "Actix", "Redis", "Prometheus"],
+    link: "https://github.com/ivanpsg",
+    thumbnail: undefined,
+  },
+];
+---
+
+<section
+  id="projetos"
+  class="section bg-modern-bg"
+  aria-labelledby="projects-title"
+>
+  <div class="container-custom">
+    <!-- Terminal prompt title -->
+    <p class="font-mono text-sm md:text-base text-modern-muted mb-8">
+      <span class="text-modern-accent">ivanpsg@portifolio</span>:<span
+        class="text-modern-accent2">~</span
+      >$ <span class="text-modern-text">projects</span>
+    </p>
+
+    <!-- Título da seção -->
+    <div class="mb-12">
+      <h2
+        id="projects-title"
+        class="text-3xl md:text-4xl font-bold text-modern-text mb-4"
+      >
+        Projetos em <span class="text-gradient">Destaque</span>
+      </h2>
+      <p class="text-lg text-modern-muted max-w-2xl">
+        Seleção de projetos que demonstram minhas habilidades em backend,
+        arquitetura e otimização de sistemas.
+      </p>
+    </div>
+
+    <!-- Grid de projetos -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+      role="list"
+      aria-label="Lista de projetos"
+    >
+      {
+        projects.map((project) => (
+          <div role="listitem">
+            <ProjectCard {...project} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

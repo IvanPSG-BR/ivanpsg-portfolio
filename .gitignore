@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# astrojs
+/.astro/
 /out/
 
 # production
@@ -34,3 +34,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+

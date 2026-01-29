@@ -1,0 +1,49 @@
+---
+/**
+ * Página Principal - Index
+ *
+ * Integra todos os componentes do portfólio:
+ * - Header (navegação)
+ * - Hero (apresentação)
+ * - About (sobre mim)
+ * - Projects (projetos)
+ * - Carousel (certificados)
+ * - Contact (contato)
+ * - Footer
+ */
+
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Projects from "../components/Projects.astro";
+import Carousel from "../components/Carousel.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base
+  title="Ivan Pedro Sampaio Gonçalves - Desenvolvedor Backend | Portfólio"
+  description="Portfólio de Ivan Pedro Sampaio Gonçalves - Desenvolvedor Backend especializado em soluções eficientes, escaláveis e minimalistas."
+>
+  <!-- Header com navegação -->
+  <Header />
+
+  <!-- Hero - Apresentação principal -->
+  <Hero />
+
+  <!-- Sobre Mim -->
+  <About />
+
+  <!-- Projetos em destaque -->
+  <Projects />
+
+  <!-- Carrossel de certificados -->
+  <Carousel />
+
+  <!-- Formulário de contato -->
+  <Contact />
+
+  <!-- Footer -->
+  <Footer />
+</Base>
