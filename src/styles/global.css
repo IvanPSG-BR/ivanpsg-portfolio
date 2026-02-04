@@ -68,8 +68,8 @@
   --color-bg: #ffffff;
   --color-surface: #f8f9fa;
   --color-text: #0b0f10;
-  --color-accent: #0d9488;
-  --color-accent2: #f4511e;
+  --color-accent: #f4511e;
+  --color-accent2: #0d9488;
   --color-border: #e5e7eb;
   --color-muted: #6b7280;
 
@@ -77,8 +77,8 @@
   --color-modern-bg: #ffffff;
   --color-modern-surface: #f8f9fa;
   --color-modern-text: #0b0f10;
-  --color-modern-accent: #0d9488;
-  --color-modern-accent2: #f4511e;
+  --color-modern-accent: #f4511e;
+  --color-modern-accent2: #0d9488;
   --color-modern-border: #e5e7eb;
   --color-modern-muted: #6b7280;
 }
@@ -278,7 +278,7 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 0.375rem;
-  background-color: rgba(17, 20, 23, 0.5);
+  background-color: rgba(17, 20, 23, 0.2);
   border: 1px solid var(--color-modern-border);
   color: var(--color-modern-text);
   transition: colors 240ms ease;
@@ -299,7 +299,7 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 0.375rem;
-  background-color: rgba(17, 20, 23, 0.5);
+  background-color: rgba(17, 20, 23, 0.2);
   border: 1px solid var(--color-modern-border);
   color: var(--color-modern-text);
   resize: none;
@@ -378,6 +378,11 @@
   background-color: rgba(17, 20, 23, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+/* Header com fundo cinza claro no modo light */
+[data-theme="light"] .glass {
+  background-color: rgba(243, 244, 246, 0.6);
 }
 
 /* =========================================
