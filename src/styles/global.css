@@ -2,11 +2,11 @@
    GLOBAL STYLES - ivanpsg.dev Portfolio
    ========================================= */
 
+/* Importar fontes do Google Fonts primeiro (antes de outras regras) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap");
+
 /* Importar Tailwind CSS v4 */
 @import "tailwindcss";
-
-/* Importar fontes do Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap");
 
 /* Configuração do Tema Tailwind v4 */
 @theme {
@@ -124,6 +124,20 @@
 
   h3 {
     @apply text-2xl md:text-3xl;
+  }
+
+  /* Paragraph styles - melhor destaque e contraste */
+  p {
+    color: #e6f8ffe1 !important;
+    font-weight: 400 !important;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+  }
+
+  /* Modo claro - texto mais escuro */
+  [data-theme="light"] p {
+    color: #0b0f10e1 !important;
+    font-weight: 500 !important;
   }
 
   /* Focus styles para acessibilidade */
